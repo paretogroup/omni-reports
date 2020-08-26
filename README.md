@@ -23,15 +23,15 @@ Then, create a `ReportClient` and execute your report definition.
 
 ```python
 from pareto_reports.client import ReportClient, ReportTypeResolverBuilder
+from pareto_reports.googlereports import GoogleAdsReportTypeResolver
 
 resolver = ReportTypeResolverBuilder() \
-    .extend(PlatformAReportResolver) \
-    .extend(PlatformBReportResolver) \
+    .extend(GoogleAdsReportTypeResolver) \
     .build()
 
 client = ReportClient(resolver)
 result = client.execute_report({
-    'report_type': 'PLATFORM_A_ACCOUNT_PERFORMANCE_REPORT',
+    'report_type': 'GOOGLE_ADS_ACCOUNT_PERFORMANCE_REPORT',
     'report_name': 'my_report',
     'selector': {
         'fields': ['account_id', 'cost', 'conversions', 'cost_per_conversion'],
@@ -52,16 +52,17 @@ Additionally, you can pass a context to `ReportClient` so that a `ReportTypeReso
 
 ```python
 from pareto_reports.client import ReportClient
+from pareto_reports.googlereports import GoogleAdsReportTypeResolver
 
-client = ReportClient(resolver, {
-    'PLATFORM_A_CLIENT_ID': 'MY_CLIENT_ID',
-    'PLATFORM_A_CLIENT_SECRET': 'MY_CLIENT_SECRET',
+client = ReportClient(GoogleAdsReportTypeResolver, {
+    'GOOGLE_ADS_CLIENT_ID': 'MY_CLIENT_ID',
+    'GOOGLE_ADS_CLIENT_SECRET': 'MY_CLIENT_SECRET',
 })
 
 # or via `execute_report`
 report_definition = {...}
 client.execute_report(report_definition, {
-    'PLATFORM_A_CUSTOMER_ID': 'MY_CUSTOMER_ID',
+    'GOOGLE_ADS_CUSTOMER_ID': 'MY_CUSTOMER_ID',
 })
 ```
 
