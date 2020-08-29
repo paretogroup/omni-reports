@@ -6,8 +6,10 @@ class ReportField(ReportFieldABC):
     def __init__(self, name=None, behavior=None, target_name=None, **extra):
         self.name = name
         self.behavior = behavior
-        self.target_name = target_name
         self.extra = extra
+
+        # For predicate purposes
+        self.target_name = target_name
 
 
 class AttributeReportField(ReportField):
