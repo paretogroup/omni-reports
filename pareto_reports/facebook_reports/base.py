@@ -3,7 +3,7 @@ from typing import Dict, List
 
 from aiohttp import ClientSession
 
-from pareto_reports.client.models import ReportPredicate, ReportDefinitionSelector, ReportDefinitionDateRange
+from pareto_reports.client.models import ReportPredicate, ReportDefinitionDateRange
 from pareto_reports.client.types import ReportType
 from pareto_reports.facebook_reports.fields import FacebookReportField
 
@@ -16,7 +16,6 @@ FACEBOOK_OPERATORS_MAP = {
 
 FACEBOOK_BASE_API = "https://graph.facebook.com"
 FACEBOOK_VERSION_API = "v7.0"
-
 
 REPORT_ENDPOINT_PATTERN = {
     'FACEBOOK_ACCOUNT_REPORT': "{network_id}/insights"
