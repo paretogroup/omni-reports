@@ -3,12 +3,12 @@ from typing import Dict, List
 
 from aiohttp import ClientSession
 
-from pareto_reports.client import ReportClient
-from pareto_reports.client.errors import ReportResponseError
-from pareto_reports.client.models import ReportPredicate, ReportDefinitionDateRange
-from pareto_reports.client.types import ReportType
-from pareto_reports.facebook_reports.fields import FacebookReportField, FACEBOOK_OPERATORS_MAP
-from pareto_reports.facebook_reports.settings import (
+from omni_reports.client import ReportClient
+from omni_reports.client.errors import ReportResponseError
+from omni_reports.client.models import ReportPredicate, ReportDefinitionDateRange
+from omni_reports.client.types import ReportType
+from omni_reports.facebook_reports.fields import FacebookReportField, FACEBOOK_OPERATORS_MAP
+from omni_reports.facebook_reports.settings import (
     FACEBOOK_BASE_API, FACEBOOK_VERSION_API,
     REPORT_ENDPOINT_PATTERN
 )

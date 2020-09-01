@@ -5,8 +5,8 @@ from pprint import pprint
 from aiohttp import ClientSession
 from dotenv import load_dotenv
 
-from pareto_reports.client import ReportClient
-from pareto_reports.facebook_reports import FacebookAdsReportTypeResolver
+from omni_reports.client import ReportClient
+from omni_reports.facebook_reports import FacebookAdsReportTypeResolver
 
 load_dotenv()
 

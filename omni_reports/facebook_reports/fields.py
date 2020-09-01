@@ -1,4 +1,4 @@
-from pareto_reports.client.fields import (
+from omni_reports.client.fields import (
     ReportField, AttributeReportField,
     SegmentReportField, MetricReportField
 )

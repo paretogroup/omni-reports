@@ -1,6 +1,6 @@
-from pareto_reports.facebook_reports.base import FacebookAdsReportType
+from omni_reports.facebook_reports.base import FacebookAdsReportType
 
-from pareto_reports.facebook_reports.fields import (
+from omni_reports.facebook_reports.fields import (
     FacebookAttributeReportField, FacebookMetricReportField
 )
 
