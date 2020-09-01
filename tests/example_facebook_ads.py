@@ -1,23 +1,24 @@
 import asyncio
+import os
 from pprint import pprint
 
 from aiohttp import ClientSession
+from dotenv import load_dotenv
 
 from pareto_reports.client import ReportClient
 from pareto_reports.facebook_reports import FacebookAdsReportTypeResolver
 
-
-TEMP_ACCESS_TOKEN = "EAAIuoYA4YdIBAF7GxCpIxqA7MuyTAizZCbloFLMBcGnxngcjwV9RXSSWExST3X0D6ZC9aBviAn1AJZCp7lbJZAktaaxyMxg6j25tZBStKZC9E7kqRprkjpEeZA7F4vDbZBjmH2IZBIsRj3Ee9NjtSwM7ocsHgD4jcCM7h3Fep5Ca1qxnjCJ01tskLou3coEhc78ugaDSiE1I5XoZBqF6Ox1t5i"
+load_dotenv()
 
 
 async def request():
     async with ClientSession() as session:
         client = ReportClient(FacebookAdsReportTypeResolver, {
-            'FACEBOOK_TOKEN': TEMP_ACCESS_TOKEN,
-            'FACEBOOK_NETWORK_ID': "act_2061402793900152",
-        })
+            'FACEBOOK_TOKEN': os.getenv('FACEBOOK_TOKEN'),
+            'FACEBOOK_NETWORK_ID': os.getenv('FACEBOOK_NETWORK_ID'),
+        }, session=session)
 
-        result = await client.execute_report_async(session, {
+        result = await client.execute_report({
             "report_type": "FACEBOOK_ADS_ACCOUNT_PERFORMANCE_REPORT",
             "report_name": "test",
             "selector": {

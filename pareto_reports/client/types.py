@@ -82,12 +82,11 @@ class ReportType(ReportTypeABC, metaclass=ReportTypeMeta):
     class Meta:
         pass
 
-    async def execute_async(self, session, report_definition, context, client):
+    async def execute(self, report_definition, context, client):
         fields = self._extract_fields(report_definition)
         predicates = self._extract_predicates(report_definition)
 
-        records = await self.resolve_async(
-            session,
+        records = await self.resolve(
             fields,
             predicates,
             report_definition,
@@ -97,24 +96,7 @@ class ReportType(ReportTypeABC, metaclass=ReportTypeMeta):
 
         return self._filter_fields_in_records(records, fields)
 
-    def execute(self, report_definition, context, client):
-        fields = self._extract_fields(report_definition)
-        predicates = self._extract_predicates(report_definition)
-
-        records = self.resolve(
-            fields,
-            predicates,
-            report_definition,
-            context,
-            client,
-        )
-
-        return self._filter_fields_in_records(records, fields)
-
-    def resolve(self, fields, predicates, report_definition, context, client):
-        raise NotImplementedError
-
-    async def resolve_async(self, session, fields, predicates, report_definition, context, client):
+    async def resolve(self, fields, predicates, report_definition, context, client):
         raise NotImplementedError
 
     def _extract_predicates(self, report_definition):
