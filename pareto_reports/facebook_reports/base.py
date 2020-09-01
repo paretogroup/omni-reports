@@ -3,6 +3,7 @@ from typing import Dict, List
 
 from aiohttp import ClientSession
 
+from pareto_reports.client import ReportClient
 from pareto_reports.client.errors import ReportResponseError
 from pareto_reports.client.models import ReportPredicate, ReportDefinitionDateRange
 from pareto_reports.client.types import ReportType
@@ -22,12 +23,13 @@ class FacebookAdsReportType(ReportType):
     FIELD_BEGIN_SEPARATOR = "{"
     FIELD_END_SEPARATOR = "}"
 
-    def resolve(self, fields, predicates, report_definition, context, client):
-        pass
-
-    async def resolve_async(self, session, fields, predicates, report_definition, context, client):
+    async def resolve(self, fields, predicates, report_definition, context, client: ReportClient):
         if not self.REPORT_TYPE:
             raise AttributeError('The attribute "facebook_report_type" is required')
+
+        session = client.session
+        if not session:
+            raise RuntimeError('Client session cannot be null.')
 
         date_range: ReportDefinitionDateRange = report_definition.selector.date_range
 

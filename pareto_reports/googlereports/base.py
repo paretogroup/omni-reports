@@ -3,7 +3,9 @@ from io import TextIOWrapper
 
 from googleads import oauth2, adwords, common
 
+from pareto_reports.client import ReportClient
 from pareto_reports.client.types import ReportType
+from pareto_reports.client.utils import async_wrap
 
 GOOGLE_OPERATORS_MAP = {
     'equals': 'EQUALS',
@@ -16,19 +18,33 @@ GOOGLE_OPERATORS_MAP = {
 class GoogleAdsReportType(ReportType):
     REPORT_TYPE = None
 
-    def resolve(self, fields, predicates, report_definition, context, client):
+    async def resolve(self, fields, predicates, report_definition, context, client: ReportClient):
         google_report_type = self.REPORT_TYPE
         if not google_report_type:
             raise AttributeError('The attribute "google_report_type" is required')
 
-        gads_report_definition = self.__convert_to_google_ads_report_definition(fields,
-                                                                                predicates,
-                                                                                report_definition,
-                                                                                google_report_type)
+        gads_report_definition = self.__convert_to_google_ads_report_definition(
+            fields,
+            predicates,
+            report_definition,
+            google_report_type
+        )
+
         gads_client = self.__create_client(context)
+        async_func = async_wrap(self.retrieve_report)
+
+        return await async_func(
+            fields,
+            gads_client,
+            gads_report_definition,
+            loop=client.event_loop
+        )
+
+    def retrieve_report(self, fields, gads_client, gads_report_definition):
         gads_report_stream = self.__download_report_as_stream(gads_client, gads_report_definition)
         gads_report_stream_wrapper = TextIOWrapper(gads_report_stream, encoding='utf-8')
         gads_report_reader = csv.DictReader(gads_report_stream_wrapper)
+
         return self.__convert_from_google_ads_records(gads_report_reader, fields)
 
     @staticmethod
