@@ -16,7 +16,7 @@ async def request():
         client = ReportClient(FacebookAdsReportTypeResolver, {
             'FACEBOOK_TOKEN': os.getenv('FACEBOOK_TOKEN'),
             'FACEBOOK_NETWORK_ID': os.getenv('FACEBOOK_NETWORK_ID'),
-        }, event_loop=loop, session=session)
+        }, session=session)
 
         result = await client.execute_report({
             "report_type": "FACEBOOK_ADS_ACCOUNT_PERFORMANCE_REPORT",
