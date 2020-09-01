@@ -1,6 +1,8 @@
 from pareto_reports.facebook_reports.base import FacebookAdsReportType
 
-from pareto_reports.facebook_reports.fields import FacebookAttributeReportField, FacebookMetricReportField
+from pareto_reports.facebook_reports.fields import (
+    FacebookAttributeReportField, FacebookMetricReportField
+)
 
 BOOLEAN_VALUES = {
     'true': True,

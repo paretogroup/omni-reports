@@ -21,4 +21,9 @@ class InvalidReportRecordError(RuntimeError):
 
 class InvalidReportDefinitionError(RuntimeError):
     def __init__(self, report_definition, message):
-        super(InvalidReportDefinitionError, self).__init__(message)
+        super().__init__(message)
+
+
+class ReportResponseError(RuntimeError):
+    def __init__(self, message):
+        super().__init__(message)

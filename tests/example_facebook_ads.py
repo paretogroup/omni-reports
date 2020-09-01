@@ -1,5 +1,4 @@
 import asyncio
-import os
 from pprint import pprint
 
 from aiohttp import ClientSession
@@ -7,22 +6,8 @@ from aiohttp import ClientSession
 from pareto_reports.client import ReportClient
 from pareto_reports.facebook_reports import FacebookAdsReportTypeResolver
 
-FACEBOOK_BASE_API = "https://graph.facebook.com"
-FACEBOOK_VERSION_API = "v7.0"
 
-TEMP_ACCESS_TOKEN = "EAAIuoYA4YdIBAAByxwPQrG97tosgc0ZBP3AadLZCcGZCXp2rBflbuo6cNoWXzwviMZA3O9sPwnzKXJ9k1d1tsxVy5ziMuYBZA3PDQb3X36wZBlHHoJm458hyRAQ0klcmMFYVWR0JVKT2Bskv8f40GK2K4uPbjxEgGVGOWrp9LwpUmOxk7jZAJZANxbqBBDh5pKbkSrkEufd1IH39KWpNwZCfi"
-
-FACEBOOK_USER_INFO_REPORT_ENDPOINT = 'me'
-FIELDS = "id,name,accounts{name}"
-
-
-REPORT_ENDPOINT = {
-    'FACEBOOK_USER_INFO_REPORT': FACEBOOK_USER_INFO_REPORT_ENDPOINT
-}
-
-
-def get_base_url():
-    return f"{FACEBOOK_BASE_API}/{FACEBOOK_VERSION_API}"
+TEMP_ACCESS_TOKEN = "EAAIuoYA4YdIBAF7GxCpIxqA7MuyTAizZCbloFLMBcGnxngcjwV9RXSSWExST3X0D6ZC9aBviAn1AJZCp7lbJZAktaaxyMxg6j25tZBStKZC9E7kqRprkjpEeZA7F4vDbZBjmH2IZBIsRj3Ee9NjtSwM7ocsHgD4jcCM7h3Fep5Ca1qxnjCJ01tskLou3coEhc78ugaDSiE1I5XoZBqF6Ox1t5i"
 
 
 async def request():
@@ -41,13 +26,13 @@ async def request():
                     "start": "2020-02-15",
                     "end": "2020-02-16",
                 },
-                # "predicates": [
-                #     {
-                #         "field": "customer_id",
-                #         "operator": "equals",
-                #         "values": ["2061402793900152"]
-                #     }
-                # ]
+                "predicates": [
+                    {
+                        "field": "cost",
+                        "operator": "equals",
+                        "values": ["1396.77"]
+                    }
+                ]
             }
         })
 

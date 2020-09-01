@@ -1,4 +1,14 @@
-from pareto_reports.client.fields import ReportField, AttributeReportField, SegmentReportField, MetricReportField
+from pareto_reports.client.fields import (
+    ReportField, AttributeReportField,
+    SegmentReportField, MetricReportField
+)
+
+FACEBOOK_OPERATORS_MAP = {
+    'equals': 'EQUAL',
+    'not_equals': 'NOT_EQUALS',
+    'in': 'IN',
+    'not_in': 'NOT_IN',
+}
 
 
 class FacebookReportField(ReportField):

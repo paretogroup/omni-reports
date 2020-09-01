@@ -3,23 +3,14 @@ from typing import Dict, List
 
 from aiohttp import ClientSession
 
+from pareto_reports.client.errors import ReportResponseError
 from pareto_reports.client.models import ReportPredicate, ReportDefinitionDateRange
 from pareto_reports.client.types import ReportType
-from pareto_reports.facebook_reports.fields import FacebookReportField
-
-FACEBOOK_OPERATORS_MAP = {
-    'equals': 'EQUAL',
-    'not_equals': 'NOT_EQUALS',
-    'in': 'IN',
-    'not_in': 'NOT_IN',
-}
-
-FACEBOOK_BASE_API = "https://graph.facebook.com"
-FACEBOOK_VERSION_API = "v7.0"
-
-REPORT_ENDPOINT_PATTERN = {
-    'FACEBOOK_ACCOUNT_REPORT': "{network_id}/insights"
-}
+from pareto_reports.facebook_reports.fields import FacebookReportField, FACEBOOK_OPERATORS_MAP
+from pareto_reports.facebook_reports.settings import (
+    FACEBOOK_BASE_API, FACEBOOK_VERSION_API,
+    REPORT_ENDPOINT_PATTERN
+)
 
 
 def get_base_url():
@@ -107,6 +98,13 @@ class FacebookAdsReportType(ReportType):
 
     @staticmethod
     def _resolve_fields_on_records(records, fields) -> List[dict]:
+        if not isinstance(records, dict):
+            raise ValueError(f'Invalid records response for {records}')
+        if 'error' in records:
+            raise ReportResponseError(
+                f"\n\nFacebook Api response error:\n{records.get('error')}"
+            )
+
         only_records = records.get("data") or []
         only_records = only_records if isinstance(only_records, list) else list(only_records)
 
