@@ -1,4 +1,3 @@
-import asyncio
 from typing import Optional, Dict, Any
 
 from aiohttp import ClientSession
@@ -13,7 +12,7 @@ class ReportClient:
     __report_schema = ReportSchema()
 
     session: Optional[ClientSession]
-    event_loop: Any
+    event_loop: Optional[Any]
 
     def __init__(
             self, resolver: ReportTypeResolverABC,
@@ -25,10 +24,7 @@ class ReportClient:
         self.context = context or dict()
 
         self.session = session
-
-        self.event_loop = event_loop or asyncio.get_event_loop()
-        if not self.event_loop:
-            raise RuntimeError("Failed on getting the event loop.")
+        self.event_loop = event_loop
 
     async def execute_report(self, report_definition, context=None):
         context = context or dict()
