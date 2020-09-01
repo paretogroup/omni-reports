@@ -1,6 +1,6 @@
-from pareto_reports.googlereports.base import GoogleAdsReportType
+from omni_reports.googlereports.base import GoogleAdsReportType
 
-from pareto_reports.client.fields import AttributeReportField, MetricReportField, SegmentReportField
+from omni_reports.client.fields import AttributeReportField, MetricReportField, SegmentReportField
 
 BOOLEAN_VALUES = {
     'true': True,

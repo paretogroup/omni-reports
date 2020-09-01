@@ -1,9 +1,9 @@
 import inspect
 
-from pareto_reports.client.errors import ReportTypeFieldNotFoundError, InvalidReportRecordError
-from pareto_reports.client.fields import ReportFieldABC
-from pareto_reports.client.models import ReportPredicate
-from pareto_reports.client.utils import is_instance_or_subclass
+from omni_reports.client.errors import ReportTypeFieldNotFoundError, InvalidReportRecordError
+from omni_reports.client.fields import ReportFieldABC
+from omni_reports.client.models import ReportPredicate
+from omni_reports.client.utils import is_instance_or_subclass
 
 
 def _get_fields(attrs, field_class, pop=False):

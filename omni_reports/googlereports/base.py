@@ -3,9 +3,9 @@ from io import TextIOWrapper
 
 from googleads import oauth2, adwords, common
 
-from pareto_reports.client import ReportClient
-from pareto_reports.client.types import ReportType
-from pareto_reports.client.utils import async_wrap
+from omni_reports.client import ReportClient
+from omni_reports.client.types import ReportType
+from omni_reports.client.utils import async_wrap
 
 GOOGLE_OPERATORS_MAP = {
     'equals': 'EQUALS',

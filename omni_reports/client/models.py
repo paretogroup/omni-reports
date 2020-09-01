@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Dict, List
 
-from pareto_reports.client.fields import ReportField
+from omni_reports.client.fields import ReportField
 
 
 class ReportPredicate:

@@ -1,4 +1,4 @@
-from pareto_reports.client.errors import ReportTypeNotFoundError
+from omni_reports.client.errors import ReportTypeNotFoundError
 
 
 class ReportTypeResolverABC:

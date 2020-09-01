@@ -4,8 +4,8 @@ from pprint import pprint
 
 from dotenv import load_dotenv
 
-from pareto_reports.client import ReportClient
-from pareto_reports.googlereports import GoogleAdsReportTypeResolver
+from omni_reports.client import ReportClient
+from omni_reports.googlereports import GoogleAdsReportTypeResolver
 
 load_dotenv()
 

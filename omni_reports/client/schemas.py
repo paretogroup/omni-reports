@@ -1,7 +1,7 @@
 from marshmallow import Schema, post_load, validate
 from marshmallow import fields as ma_fields
 
-from pareto_reports.client import models
+from omni_reports.client import models
 
 
 class ReportDefinitionPredicateSchema(Schema):

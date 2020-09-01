@@ -1,19 +1,19 @@
-## Pareto Reports
+## Omni Reports
 
-Pareto Reports is a client to request, normalize and consolidate reports
+Omni Reports is a client to request, normalize and consolidate reports
 from several platforms using a simple, declarative and concise request structure.
-Behind the scenes, the _Pareto Reports Client_ will convert the report definition into platform-specific
+Behind the scenes, the _Omni Report Client_ will convert the report definition into platform-specific
 report requests.
 
-The _Pareto Report Definition_ is a json-like data structure based on _Google Ads Report Definition_,
+The _Omni Report Definition_ is a json-like data structure based on _Google Ads Report Definition_,
 accepting several elements to query and segment a report.
 
 #### Installation
 
-To install _Pareto Reports_, use `pip`:
+To install _Omni Reports_, use `pip`:
 
 ```shell script
-pip install -U pareto-reports
+pip install git+https://github.com/paretogroup/omni-reports#egg=omni_reports
 ```
 
 #### Usage
@@ -22,8 +22,8 @@ Create a `ReportTypeResolver` to resolve report types of each platform (like Goo
 Then, create a `ReportClient` and execute your report definition. 
 
 ```python
-from pareto_reports.client import ReportClient, ReportTypeResolverBuilder
-from pareto_reports.googlereports import GoogleAdsReportTypeResolver
+from omni_reports.client import ReportClient, ReportTypeResolverBuilder
+from omni_reports.googlereports import GoogleAdsReportTypeResolver
 
 resolver = ReportTypeResolverBuilder() \
     .extend(GoogleAdsReportTypeResolver) \
@@ -51,8 +51,8 @@ print(result)
 Additionally, you can pass a context to `ReportClient` so that a `ReportTypeResolver` can be configured.
 
 ```python
-from pareto_reports.client import ReportClient
-from pareto_reports.googlereports import GoogleAdsReportTypeResolver
+from omni_reports.client import ReportClient
+from omni_reports.googlereports import GoogleAdsReportTypeResolver
 
 client = ReportClient(GoogleAdsReportTypeResolver, {
     'GOOGLE_ADS_CLIENT_ID': 'MY_CLIENT_ID',
@@ -68,7 +68,7 @@ client.execute_report(report_definition, {
 
 #### Creating a ReportType
 
-Create a `ReportType` in _Pareto Reports_ is simple. Just create a new class extending `ReportType`, declare 
+Create a `ReportType` in _Omni Reports_ is simple. Just create a new class extending `ReportType`, declare 
 the fields of your report type and implement the resolve method. The `ReportClient` will validate all definitions of 
 your report type and call the resolver.
 
@@ -84,9 +84,9 @@ of the report.
 After the identification of the behavior for each report type field, you can start declaring the report type class:
  
 ```python
-from pareto_reports.client import ReportClient, ReportTypeResolverBuilder
-from pareto_reports.client.types import ReportType
-from pareto_reports.client.fields import AttributeReportField, MetricReportField, SegmentReportField
+from omni_reports.client import ReportClient, ReportTypeResolverBuilder
+from omni_reports.client.types import ReportType
+from omni_reports.client.fields import AttributeReportField, MetricReportField, SegmentReportField
 
 
 class MyAdReportType(ReportType):
