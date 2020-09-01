@@ -27,10 +27,10 @@ class FacebookAdsReportType(ReportType):
         if not self.REPORT_TYPE:
             raise AttributeError('The attribute "facebook_report_type" is required')
 
-        session = client.session
-        if not session:
-            raise RuntimeError('Client session cannot be null.')
+        if client.session is None:
+            raise AttributeError('Client session cannot be null.')
 
+        session = client.session
         date_range: ReportDefinitionDateRange = report_definition.selector.date_range
 
         self._validate_predicates(predicates, fields, date_range)
