@@ -2,10 +2,9 @@ from typing import Optional, Dict, Any
 
 from aiohttp import ClientSession
 
-from pareto_reports.client.models import Report
-from pareto_reports.client.resolvers import ReportTypeResolverABC
-from pareto_reports.client.schemas import ReportDefinitionSchema, ReportSchema
-
+from omni_reports.client.models import Report
+from omni_reports.client.resolvers import ReportTypeResolverABC
+from omni_reports.client.schemas import ReportDefinitionSchema, ReportSchema
 
 class ReportClient:
     __report_definition_schema = ReportDefinitionSchema()

@@ -1,2 +1,0 @@
-from pareto_reports.client.client import ReportClient
-from pareto_reports.client.resolvers import ReportTypeResolverBuilder
