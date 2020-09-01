@@ -17,6 +17,7 @@ class ReportDefinitionPredicateSchema(Schema):
 class ReportDefinitionDateRangeSchema(Schema):
     start = ma_fields.Date(format="%Y-%m-%d", required=True)
     end = ma_fields.Date(format="%Y-%m-%d", required=True)
+    time_increment = ma_fields.Integer(required=False)
 
     @post_load
     def create(self, data, **kwargs):

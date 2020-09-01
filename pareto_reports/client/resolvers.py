@@ -2,6 +2,9 @@ from pareto_reports.client.errors import ReportTypeNotFoundError
 
 
 class ReportTypeResolverABC:
+    async def process_async(self, session, report_definition, context, client):
+        raise NotImplementedError()
+
     def process(self, report_definition, context, client):
         raise NotImplementedError()
 
@@ -9,6 +12,12 @@ class ReportTypeResolverABC:
 class ReportTypeResolver(ReportTypeResolverABC):
     def __init__(self, types=None):
         self.types = types or {}
+
+    async def process_async(self, session, report_definition, context, client):
+        type_config = self.types.get(report_definition.report_type)
+        if not type_config:
+            raise ReportTypeNotFoundError(report_definition)
+        return await type_config.execute_async(session, report_definition, context, client)
 
     def process(self, report_definition, context, client):
         type_config = self.types.get(report_definition.report_type)
@@ -28,7 +37,7 @@ class ReportTypeResolverBuilder:
         self.__types[report_type] = report_type_config
         return self
 
-    def build(self):
+    def build(self) -> ReportTypeResolverABC:
         return ReportTypeResolver(
             types=self.__types,
         )

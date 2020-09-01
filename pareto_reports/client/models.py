@@ -31,15 +31,19 @@ class ReportDefinitionPredicate:
 
 
 class ReportDefinitionDateRange:
-    def __init__(self, start: date = None, end: date = None):
+    def __init__(self, start: date = None, end: date = None, time_increment: int = 1):
         self.start = start
         self.end = end
+        self.time_increment = time_increment or 1
 
     def __str__(self):
         return f"<ReportDefinitionDateRange start={self.start} end={self.end}>"
 
     def __repr__(self):
         return self.__str__()
+
+    def __bool__(self):
+        return bool(self.start and self.end and self.time_increment)
 
 
 class ReportDefinitionSelector:

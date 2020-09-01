@@ -1,8 +1,8 @@
 import inspect
 
-from pareto_reports.client.models import ReportPredicate
 from pareto_reports.client.errors import ReportTypeFieldNotFoundError, InvalidReportRecordError
 from pareto_reports.client.fields import ReportFieldABC
+from pareto_reports.client.models import ReportPredicate
 from pareto_reports.client.utils import is_instance_or_subclass
 
 
@@ -82,24 +82,24 @@ class ReportType(ReportTypeABC, metaclass=ReportTypeMeta):
     class Meta:
         pass
 
-    def execute(self, report_definition, context, client):
-        fields = {}
-        for rd_field in report_definition.selector.fields:
-            field = self._declared_fields.get(rd_field)
-            if not field:
-                raise ReportTypeFieldNotFoundError(rd_field)
-            fields[rd_field] = field
+    async def execute_async(self, session, report_definition, context, client):
+        fields = self._extract_fields(report_definition)
+        predicates = self._extract_predicates(report_definition)
 
-        predicates = {}
-        for rd_predicate in report_definition.selector.predicates:
-            field = self._declared_fields.get(rd_predicate.field)
-            if not field:
-                raise ReportTypeFieldNotFoundError(rd_predicate.field)
-            predicates[rd_predicate.field] = ReportPredicate(
-                field=field,
-                operator=rd_predicate.operator,
-                values=rd_predicate.values
-            )
+        records = await self.resolve_async(
+            session,
+            fields,
+            predicates,
+            report_definition,
+            context,
+            client,
+        )
+
+        return self._filter_fields_in_records(records, fields)
+
+    def execute(self, report_definition, context, client):
+        fields = self._extract_fields(report_definition)
+        predicates = self._extract_predicates(report_definition)
 
         records = self.resolve(
             fields,
@@ -113,6 +113,33 @@ class ReportType(ReportTypeABC, metaclass=ReportTypeMeta):
 
     def resolve(self, fields, predicates, report_definition, context, client):
         raise NotImplementedError
+
+    async def resolve_async(self, session, fields, predicates, report_definition, context, client):
+        raise NotImplementedError
+
+    def _extract_predicates(self, report_definition):
+        predicates = {}
+
+        for rd_predicate in report_definition.selector.predicates:
+            field = self._declared_fields.get(rd_predicate.field)
+            if not field:
+                raise ReportTypeFieldNotFoundError(rd_predicate.field)
+            predicates[rd_predicate.field] = ReportPredicate(
+                field=field,
+                operator=rd_predicate.operator,
+                values=rd_predicate.values
+            )
+
+        return predicates
+
+    def _extract_fields(self, report_definition):
+        fields = {}
+        for rd_field in report_definition.selector.fields:
+            field = self._declared_fields.get(rd_field)
+            if not field:
+                raise ReportTypeFieldNotFoundError(rd_field)
+            fields[rd_field] = field
+        return fields
 
     @staticmethod
     def _filter_fields_in_records(records, fields):
