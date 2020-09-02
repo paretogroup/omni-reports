@@ -37,7 +37,6 @@ class GoogleAdsReportType(ReportType):
             fields,
             gads_client,
             gads_report_definition,
-            loop=client.event_loop
         )
 
     def retrieve_report(self, fields, gads_client, gads_report_definition):

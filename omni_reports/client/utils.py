@@ -1,3 +1,4 @@
+from asyncio import get_running_loop
 from functools import wraps, partial
 
 
@@ -11,13 +12,10 @@ def is_instance_or_subclass(val, class_) -> bool:
 
 def async_wrap(func):
     @wraps(func)
-    async def run(*args, loop, executor=None, **kwargs):
-        if loop is None:
-            raise AttributeError("The loop parameter cannot be null. "
-                                 "Ensure this was passed correctly through the "
-                                 "wrapped method / function.")
+    async def run(*args, loop=None, executor=None, **kwargs):
+        event_loop = loop or get_running_loop()
 
         p_func = partial(func, *args, **kwargs)
-        return await loop.run_in_executor(executor, p_func)
+        return await event_loop.run_in_executor(executor, p_func)
 
     return run

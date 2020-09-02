@@ -18,7 +18,7 @@ async def request():
         'GOOGLE_ADS_USER_AGENT': os.getenv('GOOGLE_ADS_USER_AGENT'),
         'GOOGLE_ADS_CUSTOMER_ID': os.getenv('GOOGLE_ADS_CUSTOMER_ID'),
         'GOOGLE_ADS_REFRESH_TOKEN': os.getenv('GOOGLE_ADS_REFRESH_TOKEN'),
-    }, event_loop=loop)
+    })
 
     result = await client.execute_report({
         "report_type": "GOOGLE_ADS_KEYWORDS_PERFORMANCE_REPORT",

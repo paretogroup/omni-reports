@@ -24,8 +24,8 @@ async def request():
             "selector": {
                 "fields": ["cost", "date", "currency"],
                 "date_range": {
-                    "start": "2020-02-15",
-                    "end": "2020-02-16",
+                    "start": "2000-02-15",
+                    "end": "2000-02-16",
                 },
                 "predicates": [
                     {

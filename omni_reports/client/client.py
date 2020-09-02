@@ -1,4 +1,4 @@
-from typing import Optional, Dict, Any
+from typing import Optional, Dict
 
 from aiohttp import ClientSession
 
@@ -6,24 +6,22 @@ from omni_reports.client.models import Report
 from omni_reports.client.resolvers import ReportTypeResolverABC
 from omni_reports.client.schemas import ReportDefinitionSchema, ReportSchema
 
+
 class ReportClient:
     __report_definition_schema = ReportDefinitionSchema()
     __report_schema = ReportSchema()
 
     session: Optional[ClientSession]
-    event_loop: Optional[Any]
 
     def __init__(
             self, resolver: ReportTypeResolverABC,
             context: Optional[Dict] = None,
-            event_loop: Optional[Any] = None,
             session: Optional[ClientSession] = None
     ):
         self.resolver = resolver
         self.context = context or dict()
 
         self.session = session
-        self.event_loop = event_loop
 
     async def execute_report(self, report_definition, context=None):
         context = context or dict()
