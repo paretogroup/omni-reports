@@ -1,4 +1,3 @@
-import setuptools
 from setuptools import setup
 
 with open("README.md", "r") as fh:
@@ -6,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='omni_reports',
-    packages=setuptools.find_packages(),
+    packages=['omni_reports'],
     version='0.0.4',
     description='Omni Report Definition',
     author='Pareto Group',
@@ -16,5 +15,4 @@ setup(
     url='https://github.com/paretogroup/omni-reports',
     keywords=['pareto', 'api', 'reports'],
     classifiers=[],
-    python_requires='>=3.8',
 )
