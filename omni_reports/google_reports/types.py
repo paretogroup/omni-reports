@@ -1,6 +1,5 @@
-from omni_reports.googlereports.base import GoogleAdsReportType
-
 from omni_reports.client.fields import AttributeReportField, MetricReportField, SegmentReportField
+from omni_reports.google_reports.base import GoogleAdsReportType
 
 BOOLEAN_VALUES = {
     'true': True,

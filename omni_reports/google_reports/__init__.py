@@ -1,6 +1,6 @@
 from omni_reports.client import ReportTypeResolverBuilder
 
-from omni_reports.googlereports.types import (
+from omni_reports.google_reports.types import (
     GoogleAdsAccountPerformanceReportType,
     GoogleAdsKeywordsPerformanceReportType
 )

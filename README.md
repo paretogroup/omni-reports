@@ -23,7 +23,7 @@ Then, create a `ReportClient` and execute your report definition.
 
 ```python
 from omni_reports.client import ReportClient, ReportTypeResolverBuilder
-from omni_reports.googlereports import GoogleAdsReportTypeResolver
+from omni_reports.google_reports import GoogleAdsReportTypeResolver
 
 resolver = ReportTypeResolverBuilder() \
     .extend(GoogleAdsReportTypeResolver) \
@@ -52,7 +52,7 @@ Additionally, you can pass a context to `ReportClient` so that a `ReportTypeReso
 
 ```python
 from omni_reports.client import ReportClient
-from omni_reports.googlereports import GoogleAdsReportTypeResolver
+from omni_reports.google_reports import GoogleAdsReportTypeResolver
 
 client = ReportClient(GoogleAdsReportTypeResolver, {
     'GOOGLE_ADS_CLIENT_ID': 'MY_CLIENT_ID',
