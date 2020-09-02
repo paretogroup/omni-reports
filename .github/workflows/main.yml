@@ -1,6 +1,22 @@
-- name: Deploy to PyPI
-  if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-  uses: pypa/gh-action-pypi-publish@master
-  with:
-    user: __token__
-    password: ${{ secrets.pypi_password }}
+name: Deploy to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - name: Deploy to PyPI
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.pypi_password }}
