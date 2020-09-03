@@ -1,12 +1,8 @@
 name: Deploy to PyPI
 
-#on:
-#  release:
-#    types: [published]
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [published]
 
 jobs:
   build:
