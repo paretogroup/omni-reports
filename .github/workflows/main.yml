@@ -17,6 +17,20 @@ jobs:
         python-version: [3.8]
 
     steps:
+      - name: Stop previous build
+        uses: styfle/cancel-workflow-action@0.4.1
+        with:
+          access_token: ${{ secrets.GH_TOKEN_PARETO_BOT }}
+
+      - name: Checkout to branch
+        uses: actions/checkout@v1
+
+      - name: Get Changed Files
+        id: file_changes
+        uses: trilom/file-changes-action@v1.2.3
+        with:
+          output: ' '
+
       - name: Install setuptools and wheel
         run: >-
           python -m
