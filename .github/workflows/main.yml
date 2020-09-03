@@ -28,7 +28,7 @@ jobs:
 
       - name: Build a binary wheel and gz file
         run: >-
-          ls
+          ls >> t.txt; cat t.txt;
 
       - name: Deploy to PyPI
         uses: pypa/gh-action-pypi-publish@master
