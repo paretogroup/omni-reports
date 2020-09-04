@@ -21,12 +21,6 @@ jobs:
       - name: Checkout to branch
         uses: actions/checkout@v1
 
-      - name: Get Changed Files
-        id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
-        with:
-          output: ' '
-
       - name: Install setuptools and wheel
         run: >-
           python -m
