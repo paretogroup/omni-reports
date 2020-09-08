@@ -26,8 +26,9 @@ class ReportClient:
     async def execute_report(self, report_definition, context=None):
         context = context or dict()
         context = {**self.context, **context}
-
-        report_def = self.__report_definition_schema.load(report_definition)
+        
+        # TODO: https://github.com/paretogroup/omni-reports/issues/13 
+        report_def = self.__report_definition_schema.load(report_definition).data
         report_records = await self.resolver.process(report_def, context, self)
         report = Report(
             report_definition=report_def,
