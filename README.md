@@ -13,7 +13,7 @@ accepting several elements to query and segment a report.
 To install _Omni Reports_, use `pip`:
 
 ```shell script
-pip install git+https://github.com/paretogroup/omni-reports#egg=omni_reports
+pip install omni-reports
 ```
 
 #### Usage
