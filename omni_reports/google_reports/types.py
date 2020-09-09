@@ -15,7 +15,7 @@ class GoogleAdsAccountPerformanceReportType(GoogleAdsReportType):
     REPORT_TYPE = "ACCOUNT_PERFORMANCE_REPORT"
 
     account_id = AttributeReportField(target_name="ExternalCustomerId", display_name="Customer ID")
-    day = SegmentReportField(target_name="Date", display_name="Day")
+    date = SegmentReportField(target_name="Date", display_name="Day")
     cost = MetricReportField(target_name="Cost", display_name="Cost", map=lambda val: float(val) / 1e6)
     currency = AttributeReportField(target_name="AccountCurrencyCode", display_name="Currency")
     conversions = MetricReportField(target_name="Conversions", display_name="Conversions", type=float)

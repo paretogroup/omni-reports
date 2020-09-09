@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 setup(
     name='omni_reports',
     packages=setuptools.find_packages(),
-    version='0.0.7',
+    version='0.0.8',
     description='Omni Report Definition',
     author='Pareto Group',
     author_email='noreply@paretogroup.com.br',
