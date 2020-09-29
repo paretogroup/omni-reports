@@ -1,7 +1,7 @@
 ## Omni Reports
 
 Omni Reports is a client to request, normalize and consolidate reports
-from several platforms using a simple, declarative and concise request structure.
+from several digital marketing platforms using a simple, declarative and concise request structure.
 Behind the scenes, the _Omni Report Client_ will convert the report definition into platform-specific
 report requests.
 
