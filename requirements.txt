@@ -12,7 +12,7 @@ google-auth-oauthlib==0.4.1
 googleads==23.0.0
 idna==2.8
 isodate==0.6.0
-lxml==4.5.0
+lxml==4.6.5
 marshmallow==3.4.0
 numpy==1.18.1
 oauthlib==3.1.0
